@@ -1,45 +1,39 @@
 import java.util.HashMap;
 
-public class Circle {
-    public static HashMap<Integer, Circle> circles = new HashMap<>();
-    private double rad;
+public class Oval {
+    public static HashMap<Integer, Oval> ovals = new HashMap<>();
+    private double len;
+    private double wid;
+    private int id;
 
-    public Oval(double rad) {
-        this.rad = rad;
+    // Creates an oval object and stores it in the ovals hashmap with its 'id' value as its key
+    public Oval(double len, double wid, int id) {
+        this.len = len;
+        this.wid = wid;
+        this.id = id;
+        ovals.put(id, this);
     }
 
-    public static void addCircle (double rad) {circles.put(circles.size(), new Circle(rad));}
-    public static Circle get(int id) {return circles.get(id);}
+    public static Oval get(int id) {return ovals.get(id);}
 
-    /* Returns the area of the circle with given radius
-       Area of a circle = pi * r ^ 2
-       Use Math.PI for pi and use the pow method
-     */
-    public double area() { return Math.pow(rad,2) * Math.PI; }
+    // Returns the area of the oval with given specs
+    public double area() { return len/2 * wid/2 * Math.PI; }
 
 
-    /* Returns the circumference of the circle with given radius
-       Circumference of a circle = pi * 2 * r
-       Use Math.PI for pi
-     */
-    public double circumference() { return Math.PI * 2 * rad; }
+    // Returns the circumference of the oval with given specs
+    public double circumference() { return Math.PI * (wid + len); }
 
 
-    /* Setter method to update the radius of the circle to newRadius
-     */
-    public void setRadius(double newRadius) { rad = newRadius; }
+    // Setter methods to update len and wid:
+    public void setLen(double newLen) { len = newLen;}
+    public void setWid(double newWid) { wid = newWid;}
 
 
-    /* Returns a String that includes info about the circle,
-       including its radius, area, and circumference on separate lines;
-       see example output below (Reminder: the new line escape
-       sequence \n allows you to include new lines in Strings!)
-       Note that this method should return a string -- it should NOT
-       do any printing. This method should call your other methods!
-     */
+    // Returns a String that includes info about the circle:
     public String getInfo() {
-        return String.format("Circle ID %s:\n", id) +
-                String.format("Radius: %s\n", rad) +
+        return String.format("Oval ID %s:\n", id) +
+                String.format("Length: %s\n", len) +
+                String.format("Width: %s\n", wid) +
                 String.format("Area: %s\n", area()) +
                 String.format("Circumference: %s\n", circumference());
 
